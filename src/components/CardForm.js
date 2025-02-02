@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const InputForm = ({ onSubmit }) => {
+const CardForm = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [rarity, setRarity] = useState("");
@@ -35,14 +35,10 @@ const InputForm = ({ onSubmit }) => {
         onChange={(e) => setRarity(e.target.value)}
         required
       />
-      <input
-        type="file"
-        onChange={(e) => setImage(e.target.files[0])}
-        required
-      />
+      <input type="file" onChange={(e) => setImage(e.target.files[0])} />
       <button type="submit">Create</button>
     </form>
   );
 };
 
-export default InputForm;
+export default CardForm;

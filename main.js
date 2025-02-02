@@ -3,6 +3,8 @@ const path = require("path");
 const fs = require("fs");
 let mainWindow;
 
+console.log(path.join(app.getPath("userData"), "data.json"));
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
@@ -16,6 +18,15 @@ function createWindow() {
 
   mainWindow.loadURL("http://localhost:3000"); // URL of your React app
 }
+
+ipcMain.handle("load-data", () => {
+  const filePath = path.join(app.getPath("userData"), "data.json");
+  if (fs.existsSync(filePath)) {
+    const data = fs.readFileSync(filePath, "utf-8");
+    return JSON.parse(data);
+  }
+  return [];
+});
 
 ipcMain.on("save-data", (event, data) => {
   const filePath = path.join(app.getPath("userData"), "data.json");
